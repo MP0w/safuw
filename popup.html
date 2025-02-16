@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Wallet Proxy</title>
+  <link rel="stylesheet" href="popup.css">
+  <script src="dist/popup.js"></script>
+</head>
+<body>
+  <h2>Wallet Proxy</h2>
+  <div id="connected-address">No wallet connected</div>
+  
+  <div id="pending-transaction" style="display: none;">
+    <h3>Pending Transaction</h3>
+    <div id="transaction-details"></div>
+    <div class="button-group">
+      <button id="approve-btn" class="btn btn-primary">Forward</button>
+      <button id="reject-btn" class="btn btn-danger">Reject</button>
+    </div>
+  </div>
+</body>
+</html> 
