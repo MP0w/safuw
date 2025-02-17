@@ -6,3 +6,4 @@ node_modules/
 .yarnrc.yaml
 .yarnrc.yml
 .yarnrc.yaml
+.env

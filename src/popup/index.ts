@@ -1,7 +1,10 @@
+import { executeTenderlySimulationFromRawTransaction } from "./tenderly/simulation";
+
 interface PendingTransaction {
   id: string;
   method: string;
   params: any[];
+  chainId: string;
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -23,7 +26,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     );
   }
 
-  function showTransaction(transaction: PendingTransaction) {
+  function updateDetails(transaction: PendingTransaction, simulation?: string) {
     console.log("🔍 Showing transaction:", transaction);
     const pendingElement = document.getElementById("pending-transaction");
     const detailsElement = document.getElementById("transaction-details");
@@ -31,11 +34,21 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (pendingElement && detailsElement) {
       pendingElement.style.display = "block";
       detailsElement.innerHTML = `
+        <p><strong>Simulation URL:</strong> <a href="${
+          simulation || "loading..."
+        }" target="_blank">View Simulation</a></p>
         <p><strong>Method:</strong> ${transaction.method}</p>
         <p><strong>Params:</strong></p>
         <pre>${JSON.stringify(transaction.params, null, 2)}</pre>
       `;
     }
+  }
+
+  async function showTransaction(transaction: PendingTransaction) {
+    updateDetails(transaction);
+    const simulationResponse =
+      await executeTenderlySimulationFromRawTransaction(transaction);
+    updateDetails(transaction, simulationResponse.url);
   }
 
   function handleTransactionResponse(approved: boolean) {

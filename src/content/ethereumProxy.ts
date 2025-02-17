@@ -31,8 +31,11 @@ export function createProxy(ethereum: EthereumProvider): EthereumProvider {
             if (args[0] && signMethods.includes(args[0].method)) {
               console.log("🔐 Intercepting transaction request:", args[0]);
               const requestId = Math.random().toString(36).substring(7);
+              return new Promise(async (resolve, reject) => {
+                const chainId = await ethereum.request({
+                  method: "eth_chainId",
+                });
 
-              return new Promise((resolve, reject) => {
                 window.postMessage(
                   {
                     type: "SAFUW_OPEN_POPUP",
@@ -40,6 +43,7 @@ export function createProxy(ethereum: EthereumProvider): EthereumProvider {
                       id: requestId,
                       method: args[0].method,
                       params: args[0].params,
+                      chainId: parseInt(chainId, 16).toString(),
                     },
                   },
                   "*"

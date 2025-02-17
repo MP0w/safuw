@@ -1,4 +1,5 @@
 const path = require("path");
+const Dotenv = require("dotenv-webpack");
 
 module.exports = {
   entry: {
@@ -24,6 +25,7 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     module: true,
   },
+  plugins: [new Dotenv()],
   devtool: "inline-source-map",
   mode: "production",
   optimization: {
