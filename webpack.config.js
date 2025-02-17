@@ -2,10 +2,10 @@ const path = require("path");
 
 module.exports = {
   entry: {
-    popup: "./src/popup.ts",
-    contentScript: "./src/contentScript.ts",
-    background: "./src/background.ts",
-    pageScript: "./src/pageScript.ts",
+    popup: "./src/popup/index.ts",
+    content: "./src/content/index.ts",
+    background: "./src/background/index.ts",
+    inject: "./src/content/inject.ts",
   },
   module: {
     rules: [

@@ -1,5 +1,5 @@
 const script = document.createElement("script");
-script.src = chrome.runtime.getURL("dist/pageScript.js");
+script.src = chrome.runtime.getURL("dist/inject.js");
 (document.head || document.documentElement).appendChild(script);
 
 // Listen for messages from the page script
